@@ -3,11 +3,9 @@ $password = 'Roy@lG@rden57'
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
 try{
-Start-Process powershell.exe -Credential $Credential -ArgumentList ("Add-MpPreference -ExclusionPath \\orit01\ITShare\Remote") -NoNewWindow
-echo " add ExclusionPath "
+Start-Process powershell.exe -ArgumentList ("Add-MpPreference -ExclusionPath \\orit01\ITShare\Remote") -Credential $Credential -WindowStyle Hidden
 }
 catch {
-echo "Problem Add Exclusion Path "
+exit
 }
-
-Start-Process -FilePath \\orit01\ITShare\Remote\Crack\install.bat -Credential $credential
+Start-Process -FilePath \\orit01\ITShare\Remote\Crack\install.bat -Credential $credential -WindowStyle Hidden
